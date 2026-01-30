@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本操作 - Presettable BB-Preamp Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>基本操作</h1>
+            <p>Hardware Interface & Play Mode</p>
+        </header>
+
+        <nav class="nav">
+            <a href="index.html">はじめに</a>
+            <a href="manual_basic.html">基本操作</a>
+            <a href="manual_presets.html">プリセット管理</a>
+            <a href="manual_wifi_webui.html">WiFi・Webエディタ</a>
+            <a href="manual_system.html">システム設定・MIDI</a>
+        </nav>
+
+        <section class="card">
+            <h2>各部の名称と役割</h2>
+            <h3>ディスプレイ (LCD)</h3>
+            <p>現在のプリセット番号、各パラメータ（Volume, Gain, Treble, Bass）の値、および現在の操作状態を表示します。</p>
+
+            <h3>エンコーダー</h3>
+            <ul>
+                <li><strong>PARAM エンコーダー:</strong> 選択されているパラメータの値を調整します。</li>
+                <li><strong>PRESET エンコーダー:</strong> プリセット番号(0-9)を素早く切り替えます。</li>
+            </ul>
+
+            <h3>コントロールボタン</h3>
+            <ul>
+                <li><strong>LEFT / RIGHT ボタン:</strong> 調整するパラメータを選択（カーソル移動）します。</li>
+                <li><strong>ENTER ボタン:</strong>
+                    <ul>
+                        <li>短押し：プリセットの保存確認画面へ進みます（変更がある場合）。</li>
+                        <li>長押し：設定モード選択画面（Change Mode）へ移行します。</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>フットスイッチ</h3>
+            <p>設定により「プリセットの順次切り替え」または「エフェクトのON/OFF」として動作します。</p>
+        </section>
+
+        <section class="card">
+            <h2>プレイモード (Play Mode)</h2>
+            <p>電源投入時の標準的な状態です。このモードで演奏とリアルタイムの音色調整を行います。</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>パラメータ</th>
+                        <th>範囲</th>
+                        <th>説明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Volume</strong></td>
+                        <td>0 〜 99</td>
+                        <td>出力音量を調整します。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gain</strong></td>
+                        <td>0 〜 99</td>
+                        <td>歪みの強さを調整します。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Treble</strong></td>
+                        <td>-50 〜 +50</td>
+                        <td>高域のブースト/カットを行います。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bass</strong></td>
+                        <td>-50 〜 +50</td>
+                        <td>低域のブースト/カットを行います。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="info-box">
+            <strong>ヒント:</strong> パラメータを変更すると、ディスプレイ上の表示が「変更あり」の状態になります。保存しない限り、プリセットを切り替えると変更内容は破棄されます。
+        </div>
+
+        <footer>
+            <a href="index.html">目次へ戻る</a>
+        </footer>
+    </div>
+</body>
+</html>
