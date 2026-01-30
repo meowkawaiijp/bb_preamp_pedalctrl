@@ -128,6 +128,32 @@ void CheckAndCorrectPreset(void){
   }  
 }
 
+// Range check for app params loaded from EEPROM
+static void CheckAndCorrectAppParams(void){
+  if(appParam.onoff < 0) appParam.onoff = 0;
+  if(appParam.onoff > 1) appParam.onoff = 1;
+  if(appParam.volume < 0) appParam.volume = 0;
+  if(appParam.volume > 99) appParam.volume = 99;
+  if(appParam.gain < 0) appParam.gain = 0;
+  if(appParam.gain > 99) appParam.gain = 99;
+  if(appParam.treble < -50) appParam.treble = -50;
+  if(appParam.treble > 50) appParam.treble = 50;
+  if(appParam.bass < -50) appParam.bass = -50;
+  if(appParam.bass > 50) appParam.bass = 50;
+  if(appParam.presetNo < 0) appParam.presetNo = 0;
+  if(appParam.presetNo >= NUM_PRESET) appParam.presetNo = NUM_PRESET - 1;
+  if(appParam.midi_ch < 1) appParam.midi_ch = 1;
+  if(appParam.midi_ch > 16) appParam.midi_ch = 16;
+  if(appParam.footsw_mode < FOOTSW_ALTERNATE) appParam.footsw_mode = FOOTSW_ALTERNATE;
+  if(appParam.footsw_mode > FOOTSW_PRESET) appParam.footsw_mode = FOOTSW_PRESET;
+  if(appParam.wifi_enable < 0) appParam.wifi_enable = 0;
+  if(appParam.wifi_enable > 1) appParam.wifi_enable = 1;
+  if(appParam.preset_max < 2) appParam.preset_max = 2;
+  if(appParam.preset_max > (NUM_PRESET - 1)) appParam.preset_max = NUM_PRESET - 1;
+  appParam.wifi_ssid[WIFI_SSID_MAX_LEN] = '\0';
+  appParam.wifi_pass[WIFI_PASS_MAX_LEN] = '\0';
+}
+
 // Read from EEPROM
 int load_eeprom() {
     EEPROM.get<EEPROM_DATA>(0, eeprom);
@@ -136,6 +162,7 @@ int load_eeprom() {
         memcpy( &appParam, &eeprom.params, sizeof(Type_AppParams) );
         memcpy( &presetParams[0], &eeprom.presets[0], sizeof(Type_PresetParams)*NUM_PRESET );    
 
+        CheckAndCorrectAppParams();
         // verify preset value
         CheckAndCorrectPreset();
         return true;
