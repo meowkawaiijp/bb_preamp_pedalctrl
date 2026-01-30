@@ -51,13 +51,13 @@ void CreateIndexHtml(void)
   AppendHtmlBody(index_html1);
   for(int i=0;i<NUM_PRESET;i++)
   {
-    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('v%d').value = %d;\n", i, presetParams[i].volume);
+    snprintf(tmpstr, sizeof(tmpstr), "u('v%d',%d);\n", i, presetParams[i].volume);
     AppendHtmlBody(tmpstr);
-    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('g%d').value = %d;\n", i, presetParams[i].gain);
+    snprintf(tmpstr, sizeof(tmpstr), "u('g%d',%d);\n", i, presetParams[i].gain);
     AppendHtmlBody(tmpstr);
-    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('t%d').value = %d;\n\n", i, presetParams[i].treble);
+    snprintf(tmpstr, sizeof(tmpstr), "u('t%d',%d);\n", i, presetParams[i].treble);
     AppendHtmlBody(tmpstr);
-    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('b%d').value = %d;\n\n", i, presetParams[i].bass);
+    snprintf(tmpstr, sizeof(tmpstr), "u('b%d',%d);\n", i, presetParams[i].bass);
     AppendHtmlBody(tmpstr);
   }
   AppendHtmlBody(index_html3);

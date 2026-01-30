@@ -1,375 +1,86 @@
 // HTML code to display when bpp.local is accessed.
 
 char index_html1[]=
-"<html>\n\
-<head>\n\
-<title>Presettable Blues Breaker Editor</title>\n\
-<style type=\"text/css\">\n\
-<!--\n\
-\n\
-html {\n\
-	-webkit-text-size-adjust: 100%;\n\
-}\n\
-\n\
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,input,p,blockquote,th,td {\n\
-	margin:0;\n\
-	padding:0;\n\
-	font-family: Arial, Helvetica, sans-serif;\n\
-	color: #222222;\n\
-	line-height: 1.5em;\n\
-	font-size:18px;\n\
-}\n\
-table {\n\
-	border-collapse:collapse;\n\
-	border-spacing:0;\n\
-	font-size:18px;\n\
-	margin-left:8px;\n\
-	margin-right:8px;\n\
-	margin-top:2px;\n\
-	margin-bottom: 2px;\n\
-}\n\
-h1 {\n\
-	margin: 0.5em 0 0 0;\n\
-	padding: 2px;\n\
-	color: #0068B7;\n\
-	font-weight: bold;\n\
-	border-bottom: #0068B7 6px solid;\n\
-	clear: both;\n\
-	font-size: 20px;\n\
-}\n\
-.btn--orange,\n\
-a.btn--orange {\n\
-  color: #fff;\n\
-  background-color: #eb6100;\n\
-}\n\
-.btn--orange:hover,\n\
-a.btn--orange:hover {\n\
-  color: #fff;\n\
-  background: #f56500;\n\
-}\n\
-\n\
-a.btn--radius {\n\
-   border-radius: 100vh;\n\
-}\n\
-\n\
--->\n\
-</style>\n\
-\n\
-<meta name=\"viewport\" content=\"width=device-width\" />\n\
-\n\
-</head>\n\
-<body>\n\
-\n\
-<div>\n\
-<h1>Presettable Blues Breaker Editor V1.1<br>\n\
-</h1>\n\
-</div>\n\
-  \n\
-<form action=\"http://bbp.local/preset\" method=\"get\" >\n\
-\n\
-\n\
-  <table width=\"95%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">\n\
-    <tr>\n\
-      <td width=\"10%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Preset No.</strong></div></td>\n\
-      <td width=\"20%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Volume</strong></div></td>\n\
-      <td width=\"20%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Gain</strong></div></td>\n\
-      <td width=\"25%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Treble</strong></div></td>\n\
-      <td width=\"25%\" bgcolor=\"#66CC99\"><div align=\"center\"><strong>Bass</strong></div></td>\n\
-    </tr>\n\
-    <tr>\n\
-      <td width=\"10%\"><div align=\"center\">0</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v0\" id=\"v0\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g0\" id=\"g0\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t0\" id=\"t0\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b0\" id=\"b0\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td></td>\n\
-    </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">1</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v1\" id=\"v1\" style=\"width: 100%;\" maxlength=\"2\"  >\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g1\" id=\"g1\" style=\"width: 100%;\" maxlength=\"2\"  >\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t1\" id=\"t1\" style=\"width: 100%;\" maxlength=\"3\"  >\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b1\" id=\"b1\" style=\"width: 100%;\" maxlength=\"3\"  >\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">2</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v2\" id=\"v2\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g2\" id=\"g2\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t2\" id=\"t2\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b2\" id=\"b2\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">3</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v3\" id=\"v3\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g3\" id=\"g3\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t3\" id=\"t3\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b3\" id=\"b3\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">4</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v4\" id=\"v4\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g4\" id=\"g4\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t4\" id=\"t4\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b4\" id=\"b4\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">5</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v5\" id=\"v5\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g5\" id=\"g5\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t5\" id=\"t5\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b5\" id=\"b5\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">6</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v6\" id=\"v6\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g6\" id=\"g6\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t6\" id=\"t6\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b6\" id=\"b6\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">7</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v7\" id=\"v7\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g7\" id=\"g7\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t7\" id=\"t7\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b7\" id=\"b7\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">8</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v8\" id=\"v8\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g8\" id=\"g8\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t8\" id=\"t8\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b8\" id=\"b8\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      </tr>\n\
-    <tr>\n\
-      <td><div align=\"center\">9</div></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"v9\" id=\"v9\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"20%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"g9\" id=\"g9\" style=\"width: 100%;\" maxlength=\"2\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-          <div align=\"center\">\n\
-            <input type=\"text\" name=\"t9\" id=\"t9\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-      <td width=\"25%\"><label>\n\
-        <div align=\"center\">\n\
-          <input type=\"text\" name=\"b9\" id=\"b9\" style=\"width: 100%;\" maxlength=\"3\">\n\
-          </div>\n\
-      </label></td>\n\
-    </tr>\n\
-  </table>\n\
-<br>\n\
-\n\
- <p align=\"center\"><input class=\"btn btn--orange btn--radius\" type=\"submit\" name=\"sn\" value=\"Submit preset data\"/></p>\n\
-<script language=\"javascript\">\n";
+"<html>\n"
+"<head>\n"
+"<meta charset=\"UTF-8\">\n"
+"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n"
+"<title>BBP Editor</title>\n"
+"<style>\n"
+"body{font-family:sans-serif;background:#121212;color:#eee;margin:0;padding:15px}\n"
+"h1{color:#eb6100;font-size:1.4rem;text-align:center;border-bottom:2px solid #eb6100;padding-bottom:10px;margin-bottom:20px}\n"
+".card{background:#1e1e1e;border-radius:10px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,0.3)}\n"
+".p-no{font-weight:bold;color:#eb6100;margin-bottom:12px;border-left:4px solid #eb6100;padding-left:10px}\n"
+".ctrl{display:flex;align-items:center;margin-bottom:12px}\n"
+".ctrl label{width:80px;font-size:0.9rem}\n"
+".ctrl input{flex:1;margin:0 12px;accent-color:#eb6100;cursor:pointer}\n"
+".val{width:35px;text-align:right;font-family:monospace;font-weight:bold;color:#eb6100}\n"
+".sub-btn{display:block;width:100%;max-width:300px;margin:30px auto;padding:15px;background:#eb6100;color:#fff;border:none;border-radius:30px;font-size:1.1rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(235,97,0,0.4)}\n"
+"</style>\n"
+"</head>\n"
+"<body>\n"
+"<h1>BBP Preset Editor</h1>\n"
+"<form action=\"/preset\" method=\"get\">\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 0</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v0\" id=\"v0\" min=\"0\" max=\"99\" oninput=\"u('v0',this.value)\"><span class=\"val\" id=\"v0_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g0\" id=\"g0\" min=\"0\" max=\"99\" oninput=\"u('g0',this.value)\"><span class=\"val\" id=\"g0_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t0\" id=\"t0\" min=\"-50\" max=\"50\" oninput=\"u('t0',this.value)\"><span class=\"val\" id=\"t0_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b0\" id=\"b0\" min=\"-50\" max=\"50\" oninput=\"u('b0',this.value)\"><span class=\"val\" id=\"b0_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 1</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v1\" id=\"v1\" min=\"0\" max=\"99\" oninput=\"u('v1',this.value)\"><span class=\"val\" id=\"v1_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g1\" id=\"g1\" min=\"0\" max=\"99\" oninput=\"u('g1',this.value)\"><span class=\"val\" id=\"g1_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t1\" id=\"t1\" min=\"-50\" max=\"50\" oninput=\"u('t1',this.value)\"><span class=\"val\" id=\"t1_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b1\" id=\"b1\" min=\"-50\" max=\"50\" oninput=\"u('b1',this.value)\"><span class=\"val\" id=\"b1_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 2</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v2\" id=\"v2\" min=\"0\" max=\"99\" oninput=\"u('v2',this.value)\"><span class=\"val\" id=\"v2_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g2\" id=\"g2\" min=\"0\" max=\"99\" oninput=\"u('g2',this.value)\"><span class=\"val\" id=\"g2_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t2\" id=\"t2\" min=\"-50\" max=\"50\" oninput=\"u('t2',this.value)\"><span class=\"val\" id=\"t2_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b2\" id=\"b2\" min=\"-50\" max=\"50\" oninput=\"u('b2',this.value)\"><span class=\"val\" id=\"b2_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 3</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v3\" id=\"v3\" min=\"0\" max=\"99\" oninput=\"u('v3',this.value)\"><span class=\"val\" id=\"v3_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g3\" id=\"g3\" min=\"0\" max=\"99\" oninput=\"u('g3',this.value)\"><span class=\"val\" id=\"g3_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t3\" id=\"t3\" min=\"-50\" max=\"50\" oninput=\"u('t3',this.value)\"><span class=\"val\" id=\"t3_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b3\" id=\"b3\" min=\"-50\" max=\"50\" oninput=\"u('b3',this.value)\"><span class=\"val\" id=\"b3_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 4</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v4\" id=\"v4\" min=\"0\" max=\"99\" oninput=\"u('v4',this.value)\"><span class=\"val\" id=\"v4_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g4\" id=\"g4\" min=\"0\" max=\"99\" oninput=\"u('g4',this.value)\"><span class=\"val\" id=\"g4_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t4\" id=\"t4\" min=\"-50\" max=\"50\" oninput=\"u('t4',this.value)\"><span class=\"val\" id=\"t4_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b4\" id=\"b4\" min=\"-50\" max=\"50\" oninput=\"u('b4',this.value)\"><span class=\"val\" id=\"b4_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 5</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v5\" id=\"v5\" min=\"0\" max=\"99\" oninput=\"u('v5',this.value)\"><span class=\"val\" id=\"v5_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g5\" id=\"g5\" min=\"0\" max=\"99\" oninput=\"u('g5',this.value)\"><span class=\"val\" id=\"g5_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t5\" id=\"t5\" min=\"-50\" max=\"50\" oninput=\"u('t5',this.value)\"><span class=\"val\" id=\"t5_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b5\" id=\"b5\" min=\"-50\" max=\"50\" oninput=\"u('b5',this.value)\"><span class=\"val\" id=\"b5_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 6</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v6\" id=\"v6\" min=\"0\" max=\"99\" oninput=\"u('v6',this.value)\"><span class=\"val\" id=\"v6_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g6\" id=\"g6\" min=\"0\" max=\"99\" oninput=\"u('g6',this.value)\"><span class=\"val\" id=\"g6_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t6\" id=\"t6\" min=\"-50\" max=\"50\" oninput=\"u('t6',this.value)\"><span class=\"val\" id=\"t6_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b6\" id=\"b6\" min=\"-50\" max=\"50\" oninput=\"u('b6',this.value)\"><span class=\"val\" id=\"b6_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 7</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v7\" id=\"v7\" min=\"0\" max=\"99\" oninput=\"u('v7',this.value)\"><span class=\"val\" id=\"v7_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g7\" id=\"g7\" min=\"0\" max=\"99\" oninput=\"u('g7',this.value)\"><span class=\"val\" id=\"g7_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t7\" id=\"t7\" min=\"-50\" max=\"50\" oninput=\"u('t7',this.value)\"><span class=\"val\" id=\"t7_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b7\" id=\"b7\" min=\"-50\" max=\"50\" oninput=\"u('b7',this.value)\"><span class=\"val\" id=\"b7_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 8</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v8\" id=\"v8\" min=\"0\" max=\"99\" oninput=\"u('v8',this.value)\"><span class=\"val\" id=\"v8_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g8\" id=\"g8\" min=\"0\" max=\"99\" oninput=\"u('g8',this.value)\"><span class=\"val\" id=\"g8_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t8\" id=\"t8\" min=\"-50\" max=\"50\" oninput=\"u('t8',this.value)\"><span class=\"val\" id=\"t8_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b8\" id=\"b8\" min=\"-50\" max=\"50\" oninput=\"u('b8',this.value)\"><span class=\"val\" id=\"b8_v\">0</span></div></div>\n"
+"<div class=\"card\"><div class=\"p-no\">Preset 9</div>\n"
+"<div class=\"ctrl\"><label>Volume</label><input type=\"range\" name=\"v9\" id=\"v9\" min=\"0\" max=\"99\" oninput=\"u('v9',this.value)\"><span class=\"val\" id=\"v9_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Gain</label><input type=\"range\" name=\"g9\" id=\"g9\" min=\"0\" max=\"99\" oninput=\"u('g9',this.value)\"><span class=\"val\" id=\"g9_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Treble</label><input type=\"range\" name=\"t9\" id=\"t9\" min=\"-50\" max=\"50\" oninput=\"u('t9',this.value)\"><span class=\"val\" id=\"t9_v\">0</span></div>\n"
+"<div class=\"ctrl\"><label>Bass</label><input type=\"range\" name=\"b9\" id=\"b9\" min=\"-50\" max=\"50\" oninput=\"u('b9',this.value)\"><span class=\"val\" id=\"b9_v\">0</span></div></div>\n"
+"<input type=\"submit\" class=\"sub-btn\" name=\"sn\" value=\"Save All Presets\">\n"
+"<script>\n"
+"function u(i,v){document.getElementById(i).value=v;document.getElementById(i+'_v').innerText=v;}\n";
 
-
-char index_html2[]=
-" document.getElementById('v0').value = 25; \n\
- document.getElementById('g0').value = 50; \n\
- document.getElementById('t0').value = 0; \n\
- document.getElementById('b0').value = 0; \n\
-\n\
- document.getElementById('v1').value = 25; \n\
- document.getElementById('g1').value = 50; \n\
- document.getElementById('t1').value = 0; \n\
- document.getElementById('b1').value = 0; \n\
-\n\
- document.getElementById('v2').value = 25; \n\
- document.getElementById('g2').value = 50; \n\
- document.getElementById('t2').value = 0; \n\
- document.getElementById('b2').value = 0; \n\
-\n\
- document.getElementById('v3').value = 25; \n\
- document.getElementById('g3').value = 50; \n\
- document.getElementById('t3').value = 0; \n\
- document.getElementById('b3').value = 0; \n\
-\n\
- document.getElementById('v4').value = 25; \n\
- document.getElementById('g4').value = 50; \n\
- document.getElementById('t4').value = 0; \n\
- document.getElementById('b4').value = 0; \n\
-\n\
- document.getElementById('v5').value = 25; \n\
- document.getElementById('g5').value = 50; \n\
- document.getElementById('t5').value = 0; \n\
- document.getElementById('b5').value = 0; \n\
-\n\
- document.getElementById('v6').value = 25; \n\
- document.getElementById('g6').value = 50; \n\
- document.getElementById('t6').value = 0; \n\
- document.getElementById('b6').value = 0; \n\
-\n\
- document.getElementById('v7').value = 25; \n\
- document.getElementById('g7').value = 50; \n\
- document.getElementById('t7').value = 0; \n\
- document.getElementById('b7').value = 0; \n\
-\n\
- document.getElementById('v8').value = 25; \n\
- document.getElementById('g8').value = 50; \n\
- document.getElementById('t8').value = 0; \n\
- document.getElementById('b8').value = 0; \n\
-\n\
- document.getElementById('v9').value = 25; \n\
- document.getElementById('g9').value = 50; \n\
- document.getElementById('t9').value = 0; \n\
- document.getElementById('b9').value = 0; ";
+char index_html2[]= "";
 
 char index_html3[]=
-"</script>\n\
-\n\
-</form>\n";
+"</script>\n"
+"</form>\n";
 
 char index_html4[]=
-"</body>\n\
-</html>\n";
-
+"</body>\n"
+"</html>\n";
