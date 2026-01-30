@@ -110,6 +110,20 @@ void PrintInt4Digit(int value, int px, int py){
   lcd.print(tmp);
 }
 
+bool UpdateClampedInt(int *target, int value, int minValue, int maxValue){
+  if(value < minValue) value = minValue;
+  if(value > maxValue) value = maxValue;
+  if(*target == value){
+    return false;
+  }
+  *target = value;
+  return true;
+}
+
+bool StepClampedInt(int *target, int delta, int minValue, int maxValue){
+  return UpdateClampedInt(target, *target + delta, minValue, maxValue);
+}
+
 // Range check for preset values
 void CheckAndCorrectPreset(void){
   int i;
@@ -117,15 +131,37 @@ void CheckAndCorrectPreset(void){
   // check preset value
   for(i=0; i<NUM_PRESET; i++)
   {
-    if(presetParams[i].volume<0) presetParams[i].volume=0;
-    if(presetParams[i].volume>99) presetParams[i].volume=99;
-    if(presetParams[i].gain<0) presetParams[i].gain=0;
-    if(presetParams[i].gain>99) presetParams[i].gain=99;
-    if(presetParams[i].treble<-50) presetParams[i].treble=-50;
-    if(presetParams[i].treble>50) presetParams[i].treble=50;
-    if(presetParams[i].bass<-50) presetParams[i].bass=-50;
-    if(presetParams[i].bass>50) presetParams[i].bass=50;
+    UpdateClampedInt(&presetParams[i].volume, presetParams[i].volume, 0, 99);
+    UpdateClampedInt(&presetParams[i].gain, presetParams[i].gain, 0, 99);
+    UpdateClampedInt(&presetParams[i].treble, presetParams[i].treble, -50, 50);
+    UpdateClampedInt(&presetParams[i].bass, presetParams[i].bass, -50, 50);
   }  
+}
+
+// Range check for app params loaded from EEPROM
+static void CheckAndCorrectAppParams(void){
+  if(appParam.onoff < 0) appParam.onoff = 0;
+  if(appParam.onoff > 1) appParam.onoff = 1;
+  if(appParam.volume < 0) appParam.volume = 0;
+  if(appParam.volume > 99) appParam.volume = 99;
+  if(appParam.gain < 0) appParam.gain = 0;
+  if(appParam.gain > 99) appParam.gain = 99;
+  if(appParam.treble < -50) appParam.treble = -50;
+  if(appParam.treble > 50) appParam.treble = 50;
+  if(appParam.bass < -50) appParam.bass = -50;
+  if(appParam.bass > 50) appParam.bass = 50;
+  if(appParam.presetNo < 0) appParam.presetNo = 0;
+  if(appParam.presetNo >= NUM_PRESET) appParam.presetNo = NUM_PRESET - 1;
+  if(appParam.midi_ch < 1) appParam.midi_ch = 1;
+  if(appParam.midi_ch > 16) appParam.midi_ch = 16;
+  if(appParam.footsw_mode < FOOTSW_ALTERNATE) appParam.footsw_mode = FOOTSW_ALTERNATE;
+  if(appParam.footsw_mode > FOOTSW_PRESET) appParam.footsw_mode = FOOTSW_PRESET;
+  if(appParam.wifi_enable < 0) appParam.wifi_enable = 0;
+  if(appParam.wifi_enable > 1) appParam.wifi_enable = 1;
+  if(appParam.preset_max < 2) appParam.preset_max = 2;
+  if(appParam.preset_max > (NUM_PRESET - 1)) appParam.preset_max = NUM_PRESET - 1;
+  appParam.wifi_ssid[WIFI_SSID_MAX_LEN] = '\0';
+  appParam.wifi_pass[WIFI_PASS_MAX_LEN] = '\0';
 }
 
 // Read from EEPROM
@@ -136,6 +172,7 @@ int load_eeprom() {
         memcpy( &appParam, &eeprom.params, sizeof(Type_AppParams) );
         memcpy( &presetParams[0], &eeprom.presets[0], sizeof(Type_PresetParams)*NUM_PRESET );    
 
+        CheckAndCorrectAppParams();
         // verify preset value
         CheckAndCorrectPreset();
         return true;

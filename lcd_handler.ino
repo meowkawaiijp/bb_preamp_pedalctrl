@@ -6,7 +6,7 @@ void UpdateEntireLcdDisplay(void){
     lcd.clear();    
     // Mode 0: play
     if(appVars.mode==MODE_PLAY){
-        if(appVars.selected_settings>=NUM_OF_KNOB) appVars.selected_settings=NUM_OF_KNOB-1;
+        if(appVars.selected_knob>=NUM_OF_KNOB) appVars.selected_knob=NUM_OF_KNOB-1;
         // name
         lcd.noBlink();
         lcd.setCursor(0, 0);

@@ -4,30 +4,69 @@
 #include "myUtil.h"
 
 char htmlbody[32768];
+static size_t htmlbody_len = 0;
+
+static void ResetHtmlBody(void)
+{
+  htmlbody[0] = '\0';
+  htmlbody_len = 0;
+}
+
+static void AppendHtmlBody(const char *text)
+{
+  size_t text_len = strlen(text);
+  size_t available = sizeof(htmlbody) - 1 - htmlbody_len;
+  if(available == 0){
+    return;
+  }
+  if(text_len > available){
+    text_len = available;
+  }
+  memcpy(&htmlbody[htmlbody_len], text, text_len);
+  htmlbody_len += text_len;
+  htmlbody[htmlbody_len] = '\0';
+}
+
+static bool UpdatePresetValue(int index, char key, int value)
+{
+  switch(key){
+    case 'v':
+      return UpdateClampedInt(&presetParams[index].volume, value, 0, 99);
+    case 'g':
+      return UpdateClampedInt(&presetParams[index].gain, value, 0, 99);
+    case 't':
+      return UpdateClampedInt(&presetParams[index].treble, value, -50, 50);
+    case 'b':
+      return UpdateClampedInt(&presetParams[index].bass, value, -50, 50);
+    default:
+      return false;
+  }
+}
 
 // create html message sent to web browser
 void CreateIndexHtml(void)
 {
-  char tmpstr[256];
-      strcpy(htmlbody, index_html1);
-      for(int i=0;i<NUM_PRESET;i++)
-      {
-        sprintf(tmpstr, "document.getElementById('v%d').value = %d;\n", i, presetParams[i].volume);
-        strcat(htmlbody, tmpstr);
-        sprintf(tmpstr, "document.getElementById('g%d').value = %d;\n", i, presetParams[i].gain);
-        strcat(htmlbody, tmpstr);
-        sprintf(tmpstr, "document.getElementById('t%d').value = %d;\n\n", i, presetParams[i].treble);
-        strcat(htmlbody, tmpstr);
-        sprintf(tmpstr, "document.getElementById('b%d').value = %d;\n\n", i, presetParams[i].bass);
-        strcat(htmlbody, tmpstr);
-      }
-      strcat(htmlbody, index_html3);
-      if(debug_output_to_html){
-        strcat(htmlbody, "<br />\n");
-        strcat(htmlbody, debug_message);
-        strcat(htmlbody, "<br />\n");
-      }
-      strcat(htmlbody, index_html4);
+  char tmpstr[128];
+  ResetHtmlBody();
+  AppendHtmlBody(index_html1);
+  for(int i=0;i<NUM_PRESET;i++)
+  {
+    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('v%d').value = %d;\n", i, presetParams[i].volume);
+    AppendHtmlBody(tmpstr);
+    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('g%d').value = %d;\n", i, presetParams[i].gain);
+    AppendHtmlBody(tmpstr);
+    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('t%d').value = %d;\n\n", i, presetParams[i].treble);
+    AppendHtmlBody(tmpstr);
+    snprintf(tmpstr, sizeof(tmpstr), "document.getElementById('b%d').value = %d;\n\n", i, presetParams[i].bass);
+    AppendHtmlBody(tmpstr);
+  }
+  AppendHtmlBody(index_html3);
+  if(debug_output_to_html){
+    AppendHtmlBody("<br />\n");
+    AppendHtmlBody(debug_message);
+    AppendHtmlBody("<br />\n");
+  }
+  AppendHtmlBody(index_html4);
 }
 
 // callback when root url accessed
@@ -65,14 +104,12 @@ void handleSetVol(void) {
             // check if the 2nd letter is between 0 to 9
             if(name[1]>='0' && name[1]<='9'){
               int index = name[1]-'0';
-              if(index>=0 && index<=9)
+              if(index>=0 && index<NUM_PRESET)
               {
                 int value = httpServer.arg(i).toInt();
-                if(name[0]=='v' && value>=0 && value<=99) presetParams[index].volume = value;
-                else if(name[0]=='g' && value>=0 && value<=99) presetParams[index].gain = value;
-                else if(name[0]=='t' && value>=-50 && value<=50) presetParams[index].treble = value;
-                else if(name[0]=='b' && value>=-50 && value<=50) presetParams[index].bass = value;
-                changeCount++;
+                if(UpdatePresetValue(index, name[0], value)){
+                  changeCount++;
+                }
               }
             }
           }
