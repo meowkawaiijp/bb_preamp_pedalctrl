@@ -29,42 +29,18 @@ static void AppendHtmlBody(const char *text)
 
 static bool UpdatePresetValue(int index, char key, int value)
 {
-  int minValue = 0;
-  int maxValue = 0;
-  int *target = NULL;
-
   switch(key){
     case 'v':
-      minValue = 0;
-      maxValue = 99;
-      target = &presetParams[index].volume;
-      break;
+      return UpdateClampedInt(&presetParams[index].volume, value, 0, 99);
     case 'g':
-      minValue = 0;
-      maxValue = 99;
-      target = &presetParams[index].gain;
-      break;
+      return UpdateClampedInt(&presetParams[index].gain, value, 0, 99);
     case 't':
-      minValue = -50;
-      maxValue = 50;
-      target = &presetParams[index].treble;
-      break;
+      return UpdateClampedInt(&presetParams[index].treble, value, -50, 50);
     case 'b':
-      minValue = -50;
-      maxValue = 50;
-      target = &presetParams[index].bass;
-      break;
+      return UpdateClampedInt(&presetParams[index].bass, value, -50, 50);
     default:
       return false;
   }
-
-  if(value < minValue) value = minValue;
-  if(value > maxValue) value = maxValue;
-  if(*target == value){
-    return false;
-  }
-  *target = value;
-  return true;
 }
 
 // create html message sent to web browser

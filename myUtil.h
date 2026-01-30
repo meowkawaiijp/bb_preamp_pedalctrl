@@ -19,3 +19,5 @@ extern void CheckAndCorrectPreset(void);
 extern void PrintInt2Digit(int value, int px, int py);
 extern void PrintInt3Digit(int value, int px, int py);
 extern void PrintInt4Digit(int value, int px, int py);
+extern bool UpdateClampedInt(int *target, int value, int minValue, int maxValue);
+extern bool StepClampedInt(int *target, int delta, int minValue, int maxValue);

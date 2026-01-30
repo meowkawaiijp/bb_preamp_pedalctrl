@@ -539,68 +539,68 @@ int UiEncoderHandler(void){
       case KNOB_VOLUME:
         if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_PLUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.volume++;
-          if(appParam.volume>99) appParam.volume=99;
-          appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.volume, 1, 0, 99)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
         }
         else if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_MINUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.volume--;
-          if(appParam.volume<0) appParam.volume=0;
-          appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.volume, -1, 0, 99)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
         }
         break;
 
       case KNOB_GAIN:
         if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_PLUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.gain++;
-          if(appParam.gain>99) appParam.gain=99;
-          appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.gain, 1, 0, 99)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
         }
         else if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_MINUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.gain--;
-          if(appParam.gain<0) appParam.gain=0;
-           appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.gain, -1, 0, 99)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
        }
         break;
 
       case KNOB_TREBLE:
         if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_PLUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.treble++;
-          if(appParam.treble>50) appParam.treble=50;
-          appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.treble, 1, -50, 50)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
         }
         else if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_MINUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.treble--;
-          if(appParam.treble<-50) appParam.treble=-50;
-           appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.treble, -1, -50, 50)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
        }
         break;
 
       case KNOB_BASS:
         if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_PLUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.bass++;
-          if(appParam.bass>50) appParam.bass=50;
-          appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.bass, 1, -50, 50)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
         }
         else if(sdi.encoder[UI_ENCODER_PARAM].rotation_dir == ROTATION_MINUS){
           sdi.encoder[UI_ENCODER_PARAM].rotation_dir = ROTATION_STOP; // reset rotation_dir
-          appParam.bass--;
-          if(appParam.bass<-50) appParam.bass=-50;
-           appVars.preset_changed=true;
-          ret=true;
+          if(StepClampedInt(&appParam.bass, -1, -50, 50)){
+            appVars.preset_changed=true;
+            ret=true;
+          }
        }
         break;
 
@@ -611,17 +611,17 @@ int UiEncoderHandler(void){
     // change preset
     if(sdi.encoder[UI_ENCODER_PRESET].rotation_dir == ROTATION_PLUS){
         sdi.encoder[UI_ENCODER_PRESET].rotation_dir = ROTATION_STOP; // reset rotation_dir
-        appParam.presetNo++;
-        if(appParam.presetNo>=NUM_PRESET) appParam.presetNo=NUM_PRESET-1; 
-        appVars.preset_changed=false;
-        ret=UI_CHANGE_PRESET;
+        if(StepClampedInt(&appParam.presetNo, 1, 0, NUM_PRESET-1)){
+          appVars.preset_changed=false;
+          ret=UI_CHANGE_PRESET;
+        }
     }
     else if(sdi.encoder[UI_ENCODER_PRESET].rotation_dir == ROTATION_MINUS){
         sdi.encoder[UI_ENCODER_PRESET].rotation_dir = ROTATION_STOP; // reset rotation_dir
-        appParam.presetNo--;
-        if(appParam.presetNo<0) appParam.presetNo=0;
-        appVars.preset_changed=false;
-        ret=UI_CHANGE_PRESET;
+        if(StepClampedInt(&appParam.presetNo, -1, 0, NUM_PRESET-1)){
+          appVars.preset_changed=false;
+          ret=UI_CHANGE_PRESET;
+        }
     }
     // write selected preset memory to current param
     if(ret == UI_CHANGE_PRESET)
@@ -635,52 +635,52 @@ int UiEncoderHandler(void){
     switch(appVars.selected_settings){
       case SETTING_MIDI_CH:
          if(sdi.encoder[0].rotation_dir == ROTATION_PLUS){
-          appParam.midi_ch++;
-          if(appParam.midi_ch>16) appParam.midi_ch=16;
-          ret=true;
+          if(StepClampedInt(&appParam.midi_ch, 1, 1, 16)){
+            ret=true;
+          }
         }
         else if(sdi.encoder[0].rotation_dir == ROTATION_MINUS){
-          appParam.midi_ch--;
-          if(appParam.midi_ch<1) appParam.midi_ch=1;
-          ret=true;
+          if(StepClampedInt(&appParam.midi_ch, -1, 1, 16)){
+            ret=true;
+          }
         }       
         break;
       case SETTING_FOOTSW:
          if(sdi.encoder[0].rotation_dir == ROTATION_PLUS){
-          appParam.footsw_mode++;
-          if(appParam.footsw_mode>1) appParam.footsw_mode=1;
-          ret=true;
+          if(StepClampedInt(&appParam.footsw_mode, 1, FOOTSW_ALTERNATE, FOOTSW_PRESET)){
+            ret=true;
+          }
         }
         else if(sdi.encoder[0].rotation_dir == ROTATION_MINUS){
-          appParam.footsw_mode--;
-          if(appParam.footsw_mode<0) appParam.footsw_mode=0;
-          ret=true;
+          if(StepClampedInt(&appParam.footsw_mode, -1, FOOTSW_ALTERNATE, FOOTSW_PRESET)){
+            ret=true;
+          }
         }  
         break;     
       case SETTING_WIFI_ONOFF:
          if(sdi.encoder[0].rotation_dir == ROTATION_PLUS){
-          appParam.wifi_enable++;
-          if(appParam.wifi_enable>1) appParam.wifi_enable=1;
-          appVars.wifi_onoff_changed = true;
-          ret=true;
+          if(StepClampedInt(&appParam.wifi_enable, 1, 0, 1)){
+            appVars.wifi_onoff_changed = true;
+            ret=true;
+          }
         }
         else if(sdi.encoder[0].rotation_dir == ROTATION_MINUS){
-          appParam.wifi_enable--;
-          if(appParam.wifi_enable<0) appParam.wifi_enable=0;
-          appVars.wifi_onoff_changed = true;
-          ret=true;
+          if(StepClampedInt(&appParam.wifi_enable, -1, 0, 1)){
+            appVars.wifi_onoff_changed = true;
+            ret=true;
+          }
         }       
         break;
       case SETTING_PRESET_MAX:
          if(sdi.encoder[0].rotation_dir == ROTATION_PLUS){
-          appParam.preset_max++;
-          if(appParam.preset_max>9) appParam.preset_max=9;
-          ret=true;
+          if(StepClampedInt(&appParam.preset_max, 1, 2, NUM_PRESET-1)){
+            ret=true;
+          }
         }
         else if(sdi.encoder[0].rotation_dir == ROTATION_MINUS){
-          appParam.preset_max--;
-          if(appParam.preset_max<2) appParam.preset_max=2;
-          ret=true;
+          if(StepClampedInt(&appParam.preset_max, -1, 2, NUM_PRESET-1)){
+            ret=true;
+          }
         }       
         break;      
       default:

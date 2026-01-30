@@ -110,6 +110,20 @@ void PrintInt4Digit(int value, int px, int py){
   lcd.print(tmp);
 }
 
+bool UpdateClampedInt(int *target, int value, int minValue, int maxValue){
+  if(value < minValue) value = minValue;
+  if(value > maxValue) value = maxValue;
+  if(*target == value){
+    return false;
+  }
+  *target = value;
+  return true;
+}
+
+bool StepClampedInt(int *target, int delta, int minValue, int maxValue){
+  return UpdateClampedInt(target, *target + delta, minValue, maxValue);
+}
+
 // Range check for preset values
 void CheckAndCorrectPreset(void){
   int i;
@@ -117,14 +131,10 @@ void CheckAndCorrectPreset(void){
   // check preset value
   for(i=0; i<NUM_PRESET; i++)
   {
-    if(presetParams[i].volume<0) presetParams[i].volume=0;
-    if(presetParams[i].volume>99) presetParams[i].volume=99;
-    if(presetParams[i].gain<0) presetParams[i].gain=0;
-    if(presetParams[i].gain>99) presetParams[i].gain=99;
-    if(presetParams[i].treble<-50) presetParams[i].treble=-50;
-    if(presetParams[i].treble>50) presetParams[i].treble=50;
-    if(presetParams[i].bass<-50) presetParams[i].bass=-50;
-    if(presetParams[i].bass>50) presetParams[i].bass=50;
+    UpdateClampedInt(&presetParams[i].volume, presetParams[i].volume, 0, 99);
+    UpdateClampedInt(&presetParams[i].gain, presetParams[i].gain, 0, 99);
+    UpdateClampedInt(&presetParams[i].treble, presetParams[i].treble, -50, 50);
+    UpdateClampedInt(&presetParams[i].bass, presetParams[i].bass, -50, 50);
   }  
 }
 
