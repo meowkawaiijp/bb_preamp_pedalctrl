@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プリセット管理 - Presettable BB-Preamp Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>プリセット管理</h1>
+            <p>Editing & Saving Presets</p>
+        </header>
+
+        <nav class="nav">
+            <a href="index.html">はじめに</a>
+            <a href="manual_basic.html">基本操作</a>
+            <a href="manual_presets.html">プリセット管理</a>
+            <a href="manual_wifi_webui.html">WiFi・Webエディタ</a>
+            <a href="manual_system.html">システム設定・MIDI</a>
+        </nav>
+
+        <section class="card">
+            <h2>プリセットの編集</h2>
+            <p>現在のプリセットの音色を変更するには、各パラメータをエンコーダーで調整します。</p>
+            <p>パラメータを変更すると、LCDの表示内容が変化し、変更が未保存であることを示します。</p>
+        </section>
+
+        <section class="card">
+            <h2>保存方法</h2>
+            <ol>
+                <li>パラメータ調整後、<strong>ENTER ボタン</strong>を短く押します。</li>
+                <li>画面に「Write Preset?」のような確認メッセージが表示されます。</li>
+                <li><strong>LEFT / RIGHT ボタン</strong> または <strong>PARAM エンコーダー</strong>を使用して「YES」を選択します。</li>
+                <li>再度 <strong>ENTER ボタン</strong>を押すと、設定が本体のメモリ（EEPROM）に保存されます。</li>
+            </ol>
+            <div class="info-box">
+                「Write completed」と表示されれば保存完了です。次回起動時やプリセット切り替え時にも、保存した設定が呼び出されます。
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>編集の破棄</h2>
+            <p>保存せずに他のプリセットに切り替える（PRESETエンコーダーを回す、またはフットスイッチを押す）と、現在の編集内容は破棄され、元の設定に戻ります。</p>
+        </section>
+
+        <div class="warning-box">
+            <strong>注意:</strong> 保存操作を行わずに電源を切った場合、編集内容は失われます。重要な設定は必ず保存を行ってください。
+        </div>
+
+        <footer>
+            <a href="index.html">目次へ戻る</a>
+        </footer>
+    </div>
+</body>
+</html>
