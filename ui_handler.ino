@@ -6,38 +6,46 @@
 #include "web_server.h"
 #include "ui_handler.h"
 
-// Get the number of the character in the character table (valid_ssid_char)
-int GetCharCurrentNumber_SSID()
+static int GetCharIndexInTable(const char *valid_chars, char cursorChar)
 {
-  int i, len;
-  char cursorChar;
-
-  len = strlen(appVars.edited_wifi_ssid);
-  cursorChar = appVars.edited_wifi_ssid[appVars.ssid_currectPos];
-
+  int i;
+  int len = strlen(valid_chars);
   for(i=0; i<len; i++){
-    if(valid_ssid_char[i] == cursorChar){
+    if(valid_chars[i] == cursorChar){
       return i;
     }
   }
   return 0;
 }
 
+static void CommitEditedWifiText(char *dest, char *edited, int max_len)
+{
+  for(int i=0; i<max_len; i++){
+    if(edited[i]==' '){
+      edited[i]='\0';
+      break;
+    }
+  }
+  edited[max_len] = '\0';
+  strcpy(dest, edited);
+}
+
+// Get the number of the character in the character table (valid_ssid_char)
+int GetCharCurrentNumber_SSID()
+{
+  char cursorChar;
+
+  cursorChar = appVars.edited_wifi_ssid[appVars.ssid_currectPos];
+  return GetCharIndexInTable(valid_ssid_char, cursorChar);
+}
+
 // Get the number of the character in the character table (valid_ssid_pass)
 int GetCharCurrentNumber_PASS()
 {
-  int i, len;
   char cursorChar;
 
-  len = strlen(appVars.edited_wifi_pass);
   cursorChar = appVars.edited_wifi_pass[appVars.pass_currectPos];
-
-  for(i=0; i<len; i++){
-    if(valid_pass_char[i] == cursorChar){
-      return i;
-    }
-  }
-  return 0;
+  return GetCharIndexInTable(valid_pass_char, cursorChar);
 }
 
 
@@ -364,12 +372,7 @@ int UiButtonHandler(void){
                 appVars.mode = MODE_PLAY; // 
                 // write SSID edit buffer to appParam
                 // top space replace with termination('\0')
-                for(int i=0; i<WIFI_SSID_MAX_LEN; i++){
-                  if(appVars.edited_wifi_ssid[i]==' '){
-                    appVars.edited_wifi_ssid[i]='\0';
-                  }
-                  strcpy(appParam.wifi_ssid, appVars.edited_wifi_ssid);
-                }
+                CommitEditedWifiText(appParam.wifi_ssid, appVars.edited_wifi_ssid, WIFI_SSID_MAX_LEN);
 
                 // write to EEPROM
                 if(debug_output_to_html && strlen(debug_message)<LEN_DEBUG_MESSAGE-100){
@@ -425,12 +428,7 @@ int UiButtonHandler(void){
                 appVars.mode = MODE_PLAY; // 
                 // write SSID edit buffer to appParam
                 // top space replace with termination('\0')
-                for(int i=0; i<WIFI_PASS_MAX_LEN; i++){
-                  if(appVars.edited_wifi_pass[i]==' '){
-                    appVars.edited_wifi_pass[i]='\0';
-                  }
-                  strcpy(appParam.wifi_pass, appVars.edited_wifi_pass);
-                }
+                CommitEditedWifiText(appParam.wifi_pass, appVars.edited_wifi_pass, WIFI_PASS_MAX_LEN);
 
                 // write to EEPROM
                 if(debug_output_to_html && strlen(debug_message)<LEN_DEBUG_MESSAGE-100){
