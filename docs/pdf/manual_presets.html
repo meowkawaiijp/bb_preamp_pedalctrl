@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プリセット管理 - Presettable BB-Preamp Controller</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -28,11 +32,29 @@
         </section>
 
         <section class="card">
-            <h2>保存方法</h2>
+            <h2>保存フロー</h2>
+            <p>調整した音色を保存する手順です。</p>
+            
+            <div class="mermaid">
+            flowchart TD
+                Start([パラメータ変更]) --> Check{保存する?}
+                Check -- No --> Discard[プリセット切替/電源OFF<br>(変更破棄)]
+                Check -- Yes --> PushEnter[ENTERボタンを短押し]
+                
+                PushEnter --> Confirm{Write Preset?}
+                Confirm -- No --> Play[編集に戻る]
+                
+                Confirm -- Yes --> SelectYes[LEFT/RIGHTでYESを選択]
+                SelectYes --> PushEnter2[ENTERボタンを押す]
+                PushEnter2 --> Save[(EEPROMへ保存)]
+                Save --> Done([完了表示])
+            </div>
+
+            <h3>操作手順詳細</h3>
             <ol>
                 <li>パラメータ調整後、<strong>ENTER ボタン</strong>を短く押します。</li>
-                <li>画面に「Write Preset?」のような確認メッセージが表示されます。</li>
-                <li><strong>LEFT / RIGHT ボタン</strong> または <strong>PARAM エンコーダー</strong>を使用して「YES」を選択します。</li>
+                <li>画面に「Write Preset?」という確認メッセージが表示されます。</li>
+                <li><strong>LEFT / RIGHT ボタン</strong> または <strong>PARAM エンコーダー</strong>を使用して「YES」を選択します（デフォルトはNOの場合があります）。</li>
                 <li>再度 <strong>ENTER ボタン</strong>を押すと、設定が本体のメモリ（EEPROM）に保存されます。</li>
             </ol>
             <div class="info-box">

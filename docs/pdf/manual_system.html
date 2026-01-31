@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>システム設定・MIDI - Presettable BB-Preamp Controller</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -22,8 +26,24 @@
         </nav>
 
         <section class="card">
-            <h2>設定モード (Settings)</h2>
-            <p><strong>ENTER ボタン</strong>を長押しし、「Change Mode」から「Settings」を選択することでアクセスできます。</p>
+            <h2>モード切り替えマップ</h2>
+            <p><strong>ENTER ボタン</strong>を長押しすると「Change Mode」画面に入り、以下の機能にアクセスできます。</p>
+            
+            <div class="mermaid">
+            graph LR
+                Play[Play Mode] -->|長押し| Change[Change Mode]
+                
+                Change -->|選択| PlayBack[Play Mode<br>(演奏に戻る)]
+                Change -->|選択| Settings[Settings<br>(システム設定)]
+                Change -->|選択| ShowURI[Show URI<br>(IPアドレス確認)]
+                Change -->|選択| EditSSID[Edit SSID<br>(WiFi設定)]
+                Change -->|選択| EditPASS[Edit PASS<br>(WiFi設定)]
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>設定項目 (Settings)</h2>
+            <p>Change Modeから「Settings」を選択すると、以下の項目を設定できます。設定変更後はENTERボタンで保存され、Play Modeに戻ります。</p>
 
             <table>
                 <thead>
@@ -50,12 +70,12 @@
                     <tr>
                         <td><strong>Preset Max</strong></td>
                         <td>2 〜 9</td>
-                        <td>フットスイッチで切り替えるプリセットの最大数を制限します。</td>
+                        <td>フットスイッチで切り替えるプリセットの最大数を制限します（例: 3に設定すると0→1→2→0...とループ）。</td>
                     </tr>
                     <tr>
                         <td><strong>WiFi Enable</strong></td>
                         <td>ON / OFF</td>
-                        <td>WiFi機能の有効/無効を切り替えます。</td>
+                        <td>WiFi機能の有効/無効を切り替えます。ONに切り替えると再起動を促されます。</td>
                     </tr>
                 </tbody>
             </table>
@@ -64,6 +84,18 @@
         <section class="card">
             <h2>MIDIコントロール</h2>
             <p>本機は外部MIDI機器からの<strong>プログラムチェンジ (Program Change)</strong> メッセージを受信してプリセットを切り替えることができます。</p>
+            
+            <div class="mermaid">
+            sequenceDiagram
+                participant MIDI as 外部MIDIコントローラー
+                participant BBP as BB-Preamp Ctrl
+                
+                MIDI->>BBP: Program Change #3 (Ch.1)
+                Note right of BBP: MIDI CH設定が一致すれば受信
+                BBP->>BBP: Preset #3 をロード
+                BBP-->>BBP: 画面と音色を更新
+            </div>
+
             <ul>
                 <li><strong>受信メッセージ:</strong> Program Change (0xCn)</li>
                 <li><strong>対応番号:</strong> 0 〜 9 (プリセット 0 〜 9 に対応)</li>

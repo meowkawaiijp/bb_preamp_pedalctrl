@@ -1,29 +1,32 @@
 :root {
-    --primary-color: #000;
-    --text-color: #000;
-    --bg-color: #fff;
-    --card-bg: #fff;
-    --border-color: #000;
+    --primary-color: #333;
+    --accent-color: #0056b3;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --font-main: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    font-family: var(--font-main);
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--bg-color);
+    background-color: #fff;
     margin: 0;
     padding: 0;
+    -webkit-print-color-adjust: exact;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
 header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 20px;
 }
@@ -31,49 +34,63 @@ header {
 h1 {
     color: var(--primary-color);
     font-size: 2.2rem;
+    margin: 0 0 10px 0;
+}
+
+header p {
+    color: #666;
     margin: 0;
 }
 
 h2 {
-    color: var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-    padding-bottom: 5px;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
     margin-top: 40px;
-    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 h3 {
     font-size: 1.2rem;
     margin-top: 25px;
-    color: #000;
-    text-decoration: underline;
+    color: var(--primary-color);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
 }
 
 .card {
-    background: var(--card-bg);
-    padding: 10px 0;
+    background: #fff;
+    padding: 20px;
     margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
 }
 
 .nav {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
+    background: var(--light-bg);
+    padding: 15px;
+    border-radius: 8px;
 }
 
 .nav a {
     text-decoration: none;
     color: var(--primary-color);
     font-weight: bold;
-    padding: 4px 8px;
-    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 4px;
     transition: all 0.2s;
+    border: 1px solid transparent;
 }
 
 .nav a:hover {
-    background: var(--primary-color);
+    background: var(--accent-color);
     color: white;
 }
 
@@ -81,44 +98,109 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    font-size: 0.95rem;
 }
 
 th, td {
     border: 1px solid var(--border-color);
-    padding: 10px;
+    padding: 12px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #fcfcfc;
 }
 
 .info-box, .warning-box {
-    border: 1px solid #000;
     padding: 15px;
     margin: 20px 0;
-    background-color: #fafafa;
+    border-radius: 4px;
+    border-left: 4px solid #666;
+}
+
+.info-box {
+    background-color: #e8f4fd;
+    border-left-color: #0056b3;
+}
+
+.warning-box {
+    background-color: #fff3cd;
+    border-left-color: #ffc107;
 }
 
 .info-box strong, .warning-box strong {
-    text-decoration: underline;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Mermaid diagram container */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: 8px;
 }
 
 footer {
     text-align: center;
     margin-top: 60px;
     font-size: 0.8rem;
-    color: #000;
+    color: #666;
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
 }
 
 @media print {
+    body {
+        background: #fff;
+        font-size: 11pt;
+    }
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
     .nav {
         display: none;
     }
-    .container {
-        max-width: 100%;
+    .card {
+        border: none;
+        box-shadow: none;
         padding: 0;
+        margin-bottom: 20px;
+    }
+    h2 {
+        border-bottom: 2px solid #000;
+        margin-top: 20px;
+    }
+    .mermaid {
+        background: none;
+        padding: 10px 0;
+    }
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+    /* Page breaks */
+    h2 {
+        page-break-before: auto;
+    }
+    h2:first-of-type {
+        page-break-before: avoid;
+    }
+    .card {
+        page-break-inside: avoid;
+    }
+    table {
+        page-break-inside: avoid;
     }
 }

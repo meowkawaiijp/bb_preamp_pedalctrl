@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>基本操作 - Presettable BB-Preamp Controller</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -22,35 +26,73 @@
         </nav>
 
         <section class="card">
+            <h2>ハードウェア構成</h2>
+            <div class="mermaid">
+            graph TD
+                subgraph TopPanel ["トップパネル"]
+                    LCD[LCD Display]
+                    Enc1[PARAM Encoder <br/>(Turn: Value / Push: Enter)]
+                    Enc2[PRESET Encoder <br/>(Turn: Preset No.)]
+                    BtnL[LEFT Button]
+                    BtnR[RIGHT Button]
+                    FS[Foot Switch]
+                end
+                
+                LCD --- Enc1
+                LCD --- Enc2
+                Enc1 --- BtnL
+                Enc1 --- BtnR
+                BtnL --- BtnR
+            </div>
+        </section>
+
+        <section class="card">
             <h2>各部の名称と役割</h2>
             <h3>ディスプレイ (LCD)</h3>
             <p>現在のプリセット番号、各パラメータ（Volume, Gain, Treble, Bass）の値、および現在の操作状態を表示します。</p>
 
             <h3>エンコーダー</h3>
             <ul>
-                <li><strong>PARAM エンコーダー:</strong> 選択されているパラメータの値を調整します。</li>
-                <li><strong>PRESET エンコーダー:</strong> プリセット番号(0-9)を素早く切り替えます。</li>
+                <li><strong>PARAM エンコーダー (右):</strong> 選択されているパラメータの値を調整します。押し込むと決定(ENTER)ボタンとして機能します。</li>
+                <li><strong>PRESET エンコーダー (左):</strong> プリセット番号(0-9)を素早く切り替えます。回すと即座にプリセットが読み込まれます。</li>
             </ul>
 
             <h3>コントロールボタン</h3>
             <ul>
-                <li><strong>LEFT / RIGHT ボタン:</strong> 調整するパラメータを選択（カーソル移動）します。</li>
-                <li><strong>ENTER ボタン:</strong>
+                <li><strong>LEFT / RIGHT ボタン:</strong> 調整したいパラメータ（項目）を選択します（カーソル移動）。</li>
+                <li><strong>ENTER ボタン (PARAMエンコーダー押し込み):</strong>
                     <ul>
-                        <li>短押し：プリセットの保存確認画面へ進みます（変更がある場合）。</li>
+                        <li>短押し：プリセットの保存確認など、決定操作を行います。</li>
                         <li>長押し：設定モード選択画面（Change Mode）へ移行します。</li>
                     </ul>
                 </li>
             </ul>
 
             <h3>フットスイッチ</h3>
-            <p>設定により「プリセットの順次切り替え」または「エフェクトのON/OFF」として動作します。</p>
+            <p>設定により動作が異なります（システム設定参照）。</p>
+            <ul>
+                <li><strong>Preset Mode:</strong> 押すたびに次のプリセットへ切り替わります。</li>
+                <li><strong>Alternate Mode:</strong> エフェクトのON/OFF（Bypass）を切り替えます。</li>
+            </ul>
         </section>
 
         <section class="card">
             <h2>プレイモード (Play Mode)</h2>
             <p>電源投入時の標準的な状態です。このモードで演奏とリアルタイムの音色調整を行います。</p>
 
+            <div class="mermaid">
+            graph LR
+                Start((電源ON)) --> Play[Play Mode]
+                Play -->|LEFT/RIGHT| Select[パラメータ選択]
+                Play -->|PARAM Encoder| Change[値の変更]
+                Play -->|PRESET Encoder| Load[プリセット切替]
+                
+                Select --> Play
+                Change -->|未保存状態| Play
+                Load --> Play
+            </div>
+
+            <h3>調整可能なパラメータ</h3>
             <table>
                 <thead>
                     <tr>

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiFi・Webエディタ - Presettable BB-Preamp Controller</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -22,40 +26,79 @@
         </nav>
 
         <section class="card">
-            <h2>WiFiの準備</h2>
-            <p>本機はWiFi経由でブラウザから設定を行うことができます。</p>
+            <h2>WiFi接続フロー</h2>
+            <div class="mermaid">
+            graph TD
+                Start[設定モード] --> Enable[WiFi EnableをONにして再起動]
+                Enable --> Reboot[再起動中...]
+                Reboot --> Connect{WiFi接続試行}
+                
+                Connect -->|成功| Success[IPアドレス表示<br>http://bbp.local/]
+                Connect -->|失敗| Fail[WiFi unavailable表示]
+                
+                Fail --> Reset[再起動して設定見直し]
+                Success --> Browser[スマホ/PCからアクセス]
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>セットアップ手順</h2>
+            
             <h3>1. WiFiを有効にする</h3>
             <p>設定モード（Settings）で「WiFi: ON」になっていることを確認してください。変更した場合は再起動が必要です。</p>
 
             <h3>2. SSIDとパスワードの設定</h3>
+            <p>自宅のWiFiルーターなどに接続するための設定です。</p>
             <ol>
                 <li><strong>ENTER ボタン</strong>を長押しして「Change Mode」に入ります。</li>
-                <li>「Edit SSID」または「Edit PASS」を選択して <strong>ENTER ボタン</strong>を押します。</li>
-                <li>エンコーダーと方向ボタンを使って、接続するWiFiルーターの情報を入力します。</li>
-                <li>入力後、保存して本体を再起動します。</li>
+                <li>「Edit SSID」を選択してSSIDを入力・保存します。</li>
+                <li>「Edit PASS」を選択してパスワードを入力・保存します。</li>
             </ol>
+            <div class="info-box">
+                文字入力はエンコーダーで文字を選び、左右ボタンでカーソルを移動します。最後にENTERで確定画面に進みます。
+            </div>
         </section>
 
         <section class="card">
             <h2>Webエディタへの接続</h2>
+            <div class="mermaid">
+            sequenceDiagram
+                participant User as ユーザー
+                participant Browser as ブラウザ(PC/スマホ)
+                participant BBP as 本機(http://bbp.local)
+                
+                User->>Browser: http://bbp.local/ へアクセス
+                Browser->>BBP: GET /
+                BBP-->>Browser: エディタ画面(HTML)
+                
+                User->>Browser: スライダー操作
+                Browser->>BBP: リアルタイム更新
+                BBP-->>BBP: 音色変化(一時的)
+                
+                User->>Browser: Save All Presets
+                Browser->>BBP: 保存リクエスト
+                BBP-->>BBP: EEPROMへ全プリセット保存
+                BBP-->>Browser: 完了通知
+            </div>
+
             <ol>
                 <li>本機と同じWiFiネットワークにスマートフォンやPCを接続します。</li>
-                <li>ブラウザを開き、アドレスバーに <code>http://bbp.local/</code> と入力します。</li>
+                <li>ブラウザを開き、アドレスバーに <code>http://bbp.local/</code> と入力します。（Androidなど一部環境ではIPアドレス直打ちが必要な場合があります。IPアドレスは起動時にLCDに表示されるほか、Change Modeの「Show URI」で確認できます）</li>
                 <li>「BBP Preset Editor」画面が表示されます。</li>
             </ol>
         </section>
 
         <section class="card">
             <h2>Webエディタの使い方</h2>
-            <p>ブラウザ上のスライダーを動かすことで、本体のプリセット値をリアルタイムに変更できます。</p>
+            <p>ブラウザ上のUIで全プリセットを俯瞰しながら編集できます。</p>
             <ul>
-                <li><strong>スライダー操作:</strong> 各プリセットのパラメータを調整します。</li>
+                <li><strong>スライダー操作:</strong> 各プリセットのパラメータを調整します。本体側にも即座に反映され、音を確認できます。</li>
                 <li><strong>Save All Presets:</strong> 全てのプリセット設定を一括で本体に保存します。</li>
             </ul>
         </section>
 
-        <div class="info-box">
-            <strong>注意:</strong> 演奏中にWiFi通信によるノイズが発生するのを防ぐため、プレイモード中の一部動作では通信を抑制する仕様になっています。
+        <div class="warning-box">
+            <strong>注意:</strong> 演奏中にWiFi通信によるノイズが発生するのを防ぐため、プレイモード中の一部動作では通信を抑制する仕様になっています。また、ライブ本番など通信が不要な場面では、安定動作のためにWiFiをOFFにすることをお勧めします。
         </div>
 
         <footer>
