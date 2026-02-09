@@ -32,8 +32,8 @@ void LcdPrintRTC(void)
   lcd.print(rtcstr); 
 }
 
-// Utility: Erace LCD Chars (fill with space)
-void EraceLCD(int posx, int posy, int numOfChar)
+// Utility: Erase LCD characters (fill with spaces)
+void EraseLCD(int posx, int posy, int numOfChar)
 {
   int i;
   lcd.setCursor(posx, posy);
@@ -57,22 +57,22 @@ void PrintBinLCD(unsigned char bindata)
   }
 }
 
-// print 2 digit integer with justifing to the right
+// Print 2-digit integer right-justified (e.g. "01", "99")
 void PrintInt2Digit(int value, int px, int py){
   int tmp;
   
-  EraceLCD(px, py, 2);
+  EraseLCD(px, py, 2);
   tmp=value;
   tmp%=100;
   if(tmp<10) lcd.print("0");
   lcd.print(tmp);
 }
 
-// print 3 digit integer with plus/minus display
+// Print 3-digit signed integer with +/- prefix (e.g. "+05", "-50", " 00")
 void PrintInt3Digit(int value, int px, int py){
   int tmp;
   
-  EraceLCD(px, py, 3);
+  EraseLCD(px, py, 3);
   if(value<-9){
     lcd.print(value);
   }
@@ -97,11 +97,11 @@ void PrintInt3Digit(int value, int px, int py){
   }
 }
 
-// print 4 digit integer with justifing to the right
+// Print 4-digit integer right-justified with leading zeros (e.g. "0050")
 void PrintInt4Digit(int value, int px, int py){
   int tmp;
   
-  EraceLCD(px, py, 4);
+  EraseLCD(px, py, 4);
   tmp=value;
   tmp%=10000;
   if(tmp<1000) lcd.print("0");
