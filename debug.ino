@@ -23,7 +23,7 @@ void Debug_All_IO(void)
 {
   int i;  
   // verify parsed data
-  EraceLCD(8,0,8);
+  EraseLCD(8,0,8);
   lcd.setCursor(8, 0);
   for(i=1;i>=0;i--){
     if(sdi.encoder[i].A==1) lcd.print("1");
@@ -42,7 +42,7 @@ void Debug_All_IO(void)
   digit++; digit%=0x0f;
   int tmp = (int)Get7SegSerialData(digit, digit%2);
 
-  EraceLCD(0,0,8);
+  EraseLCD(0,0,8);
   lcd.setCursor(0, 0);
   lcd.print(tmp, HEX);
   lcd.setCursor(4, 0);
